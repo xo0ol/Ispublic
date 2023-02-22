@@ -25,7 +25,7 @@ print(f'{math.trunc(worktime_min)}분 동안 {math.trunc(timesleep_min)}분에 1
 print('예상 입력 개수는 ' + str(math.trunc(((worktime_min)/timesleep_min))) + '개 입니다.')
 
 
-
+123
 
 
 x = 0
