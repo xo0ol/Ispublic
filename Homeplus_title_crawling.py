@@ -4,7 +4,7 @@ import datetime
 import openpyxl
 import os
 
-a = 123
+
 
 now = datetime.datetime.now()
 today = now.strftime('%Y-%m-%d')
@@ -31,13 +31,18 @@ hmp_url = []
 for i in ws.rows:
     hmp_url.append(ws[f'a{j}'].value)
     j = j + 1
-print(hmp_url)
 
+url_13code = []
+for x in hmp_url:
+    x = str(x)
+    url_13code.append(x.rjust(9,"0"))
+
+print(url_13code)
 
 j = 1
-for i in hmp_url:
+for i in url_13code:
     try:
-        respon = requests.get(i)
+        respon = requests.get(f"https://mfront.homeplus.co.kr/item?itemNo={i}&storeType=HYPER")
         html = respon.text
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one('title').text
