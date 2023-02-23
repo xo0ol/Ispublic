@@ -7,6 +7,7 @@ import openpyxl
 import datetime
 import os
 
+s = 123
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
