@@ -1,7 +1,6 @@
 import pyautogui
 import time
 import timeit
-import time
 import math
 from datetime import datetime
 from datetime import timedelta
@@ -15,8 +14,8 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 3
-timesleep_min = 1
+worktime_min = 30
+timesleep_min = 2
 #---------------------
 
 print('[작업 시작 시간 : ' +  start_now.strftime('%Y-%m-%d %H:%M:%S') + ']')
