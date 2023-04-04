@@ -24,10 +24,11 @@ browser.maximize_window() # 화면 제일 크게
 time.sleep(5)
 # 저장할 폴더, 파일명 정의
 
-
+pages = 10
 x = 0
 y = 1
-while x < 5:
+
+while x < pages:
     # path = r"C:\세계의역사_교재\capture({}~{}).png".format(y-1,y)
     # pag.screenshot(path, region=(290, 160, 1400, 800))
     browser.save_screenshot(r"C:\세계의역사_교재\{}-{}.png".format(y-1,y))

@@ -14,8 +14,8 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 30
-timesleep_min = 2
+worktime_min = 20
+timesleep_min = 3
 #---------------------
 
 print('[작업 시작 시간 : ' +  start_now.strftime('%Y-%m-%d %H:%M:%S') + ']')
@@ -24,7 +24,6 @@ print(f'{math.trunc(worktime_min)}분 동안 {math.trunc(timesleep_min)}분에 1
 print('예상 입력 개수는 ' + str(math.trunc(((worktime_min)/timesleep_min))) + '개 입니다.')
 
 
-123
 
 
 x = 0
@@ -39,9 +38,13 @@ while True:
         p.press('down')
         time.sleep(1)
         p.hotkey('ctrl','v')
+        
 
         x += 1
-        print(f'{x}개 입력 완료')
+        now = datetime.now().strftime('%H:%M:%S')
+        next_time = datetime.now() + timedelta(minutes=timesleep_min)
+        next_comment = next_time.strftime('%H:%M:%S')
+        print(f'{x}개 입력 완료 {now}\n다음 입력 시간 {next_comment}\n')
 
 
 terminate_time = timeit.default_timer()
