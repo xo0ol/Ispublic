@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import openpyxl
 import webbrowser
 import time
+import datetime
 
 
 
@@ -27,8 +28,9 @@ lotte_url = list(filter(None, sample_list))
 
 
 
-# 상품 정보가 남아있는 url 오픈하기
-j = 1
+# 상품 정보가 남아있는 url 출력 및 수집
+matched = []
+idx = 1
 for i in lotte_url:
 
     try:
@@ -43,13 +45,33 @@ for i in lotte_url:
         result = None
     if result != None:
         title = soup.select_one('title').text
-        print(title)
-        print(f"\n{i}\n")
-
-        # 웹브라우저 바로 열기
+        print(f"{idx}) {title}")
+        print(f"{i}\n")
+        matched.append(i)
+        idx += 1
+    
+        # # 웹브라우저 바로 열기
         # webbrowser.open(i)
         # time.sleep(2)
 
 
-    
+
+# 수집된 URL이 {minimum}개 이하면 바로 오픈하기
+minimum = 5
+if len(matched) <= minimum:
+    print(f"『추적 가능 lotte URL이 {len(matched)}개 발견되었습니다.』\nWebbrowser open")
+    time.sleep(2)
+    for x in matched:
+        webbrowser.open(x)
+        time.sleep(2)
+else:
+    print(f"『추적 가능한 lotte URL이 {len(matched)}개 발견되었습니다.』\nQuit\n")
+
+
+
+# 작업 종료 알림
+now = datetime.datetime.now()
+today = now.strftime('%Y-%m-%d %H:%M:%S')
+print(f"[{today}] 작업을 종료합니다.")
+
 
