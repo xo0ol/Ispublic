@@ -19,19 +19,19 @@ new_file_ws = new_file.active
 
 # 엑셀 파일 열기
 ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\(Ref)Lotte_unmatched_url.xlsx'
-ref_wb = openpyxl.load_workbook(ref_file)
-ref_ws = ref_wb.active
+wb = openpyxl.load_workbook(ref_file)
+ws = wb.active
 
 
 
 # 엑셀 파일 데이터 추출하기
 j = 1
 sample_list = []
-for i in ref_ws.rows:
-    sample_list.append(ref_ws[f'a{j}'].value)
+for i in ws.rows:
+    sample_list.append(ws[f'a{j}'].value)
     j = j + 1
-lotte_url = list(filter(None, sample_list))
 
+lotte_url = list(filter(None, sample_list))
 
 
 
