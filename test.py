@@ -10,7 +10,7 @@ import datetime
 
 #  URL 저장할 엑셀파일 정의하기
 now = datetime.datetime.now()
-today = now.strftime('%Y-%m-%d')
+today = now.strftime('%Y-%m-%d-%H-%S')
 new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\Lotte_unmatched_url\Lotte_unmatched_url({}).xlsx'.format(today) #울집컴
 new_file = openpyxl.Workbook()
 new_file_ws = new_file.active
@@ -19,19 +19,19 @@ new_file_ws = new_file.active
 
 # 엑셀 파일 열기
 ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\(Ref)Lotte_unmatched_url.xlsx'
-wb = openpyxl.load_workbook(ref_file)
-ws = wb.active
+ref_wb = openpyxl.load_workbook(ref_file)
+ref_ws = ref_wb.active
 
 
 
 # 엑셀 파일 데이터 추출하기
 j = 1
 sample_list = []
-for i in ws.rows:
-    sample_list.append(ws[f'a{j}'].value)
+for i in ref_ws.rows:
+    sample_list.append(ref_ws[f'a{j}'].value)
     j = j + 1
-
 lotte_url = list(filter(None, sample_list))
+
 
 
 
@@ -58,9 +58,6 @@ for i in lotte_url:
         new_file_ws[f'a{idx}'] = str(i)
         idx += 1
     
-        # # 웹브라우저 바로 열기
-        # webbrowser.open(i)
-        # time.sleep(2)
 
 
 
@@ -80,10 +77,9 @@ for i in lotte_url:
 
 # 작업 종료 알림
 new_file.save(new_file_adress)
-print('『new file saved』')
+print('『new file saved.』')
 
 end_now = datetime.datetime.now()
 end_today = now.strftime('%Y-%m-%d %H:%M:%S')
-print(f"[{today}] 작업을 종료합니다.")
-
+print(f"[{end_today}] 작업을 종료합니다.\n")
 
