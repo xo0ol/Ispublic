@@ -11,27 +11,35 @@ from selenium.webdriver.common.by import By
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
-
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-# chrome_options.add_argument('--headless')
+
+
+
+# 교재 설정
+last_pages = 3 # ebook의 마지막 페이지 +1(홀수로)
+folder_name = "엑셀데이터분석교재" # 캡쳐본을 저장할 폴더의 이름
+url = "https://ebook.claverse.com/knou/viewer_knou.jsp?qry=Cz1uyuB93RbLDpteCe9yBoIl3Vb5mFocFnYzx8WmWpooXd4eXlACvlMIcPXvhepgf2FHFKJQ8xLN54oioHnU-li8YuzERA59D76J2QH8IWHd9YcUryi8f2ifSdcOfGgrslYhQdjGMr4yBd9KGUrkX1B8CMYB4BJvQ4Pti2_9dAY9vcijIzOCe7ly_BXPRF9ucxGSSFnNrdyL4-HH5IuptRoS5CFNceGJ-p_2fwkTVEPh3N4UF2VeSmu4VsWoGUAfPyRScBFEmsTn0892Hn_nv2yt5bwYZZPBEEc-a724UbWTninu81b_8VBX7NvVYoFt#"
+################
+
 
 
 # 브라우저 킴
-url = "https://ebook.claverse.com/knou/viewer_knou.jsp?qry=hFs3eImt5zDXDSjy9tLmsvsGS0dg9q9bHj9SD2W70_0pDkxeGUTs8c7rM5bp2mA8XCEx_i3L67pWMRBEdd7pf6RUgajg3RJseKSIYlnPcZpEJYB84zKlGnhEUB5Ax8Uasrm414WYrI4UZZYWNhNn84D7BEC298zpHAsa0JuDJ9I14VlvEl3rF1f3agSU-uk3SbENbdVSHM5x8Fg72X6qoRIv50FGGBRRfwpOGkNmGk9JHmtN8nqkIdOa0YvPvGy2NFVO8k3u5DR1hH7PJFq3asajIsiczblizDNN5pHn1BBqIzYAoZoezENXG6aD7Jgv#"
 browser = webdriver.Chrome(options=chrome_options)
 browser.get(url)
 browser.maximize_window() # 화면 제일 크게
 time.sleep(5)
 # 저장할 폴더, 파일명 정의
 
-pages = 10
+
+
 x = 0
 y = 1
 
-while x < pages:
+while y <= last_pages:
     # path = r"C:\세계의역사_교재\capture({}~{}).png".format(y-1,y)
     # pag.screenshot(path, region=(290, 160, 1400, 800))
-    browser.save_screenshot(r"C:\세계의역사_교재\{}-{}.png".format(y-1,y))
+    browser.save_screenshot(r"C:\Users\xo0ol\OneDrive\바탕 화면\{}\{}-{}.png".format(folder_name,y-1,y))
+    print(f'『{y-1}-{y} pages Saved』')
     time.sleep(1)
     try:
         next_button  = browser.find_element(By.ID, 'btnPageNext')
@@ -42,6 +50,7 @@ while x < pages:
     time.sleep(2)
     x += 1
     y += 2
+
     
 browser.quit()
 # 좌표 구하기
