@@ -1,11 +1,28 @@
-import requests
-from bs4 import BeautifulSoup
-# python.exe -m pip install --upgrade pip
+import pyautogui as pag
+import time
 import openpyxl
-import webbrowser
 import time
 import datetime
+import timeit
+from PIL import ImageGrab
 
+import requests
+from bs4 import BeautifulSoup
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+
+
+# running time check
+start_time = timeit.default_timer()
+
+
+# 브라우저 꺼짐 방지
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 
 #  URL 저장할 엑셀파일 정의하기
@@ -23,7 +40,6 @@ ref_wb = openpyxl.load_workbook(ref_file)
 ref_ws = ref_wb.active
 
 
-
 # 엑셀 파일 데이터 추출하기
 j = 1
 sample_list = []
@@ -34,6 +50,7 @@ lotte_url = list(filter(None, sample_list))
 
 
 
+browser = webdriver.Chrome(options=chrome_options)
 
 # 상품 정보가 남아있는 url 출력 및 수집
 matched = []
@@ -41,24 +58,24 @@ idx = 1
 for i in lotte_url:
 
     try:
+        browser.get(i)
+        time.sleep(2)
+        title_error = browser.find_element(By.CLASS_NAME, 'titleError').text
+
+    except:
         respon = requests.get(i)
-    except:
-        next
-    html = respon.text
-    soup = BeautifulSoup(html, 'html.parser')
-    try:
-        result = soup.find('input',{'id':'metaData'}).get('value')
-    except:
-        result = None
-    if result != None:
+        html = respon.text
+        soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one('title').text
         print(f"{idx}) {title}")
         print(f"{i}\n")
         matched.append(i)
         new_file_ws[f'a{idx}'] = str(i)
         idx += 1
-    
+        next
 
+
+browser.quit()
 
 
 
@@ -80,7 +97,12 @@ new_file.save(new_file_adress)
 print('『new file saved.』')
 
 end_now = datetime.datetime.now()
-end_today = now.strftime('%Y-%m-%d %H:%M:%S')
-print(f"[{end_today}] 작업을 종료합니다.")
+end_now_str = now.strftime('%Y-%m-%d %H:%M:%S')
+finished_time = timeit.default_timer()
+running_time = finished_time - start_time
+
+running_time = finished_time - start_time
+print(f'[{running_time/60}] 소요되었습니다.')
+print(f"[{end_now_str}] 작업을 종료합니다.")
 
 
