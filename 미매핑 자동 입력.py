@@ -15,12 +15,13 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 140
-timesleep_min = 4.5
+worktime_min = 45
+timesleep_min = 4
 #---------------------
 
-
-print('『작업 시작 시간 : ' +  start_now.strftime('%Y-%m-%d %H:%M:%S') + '』')
+predict_endtime = start_now + timedelta(minutes=worktime_min)
+print('『작업 시작 시간 : ' +  start_now.strftime('%H:%M:%S') + '』')
+print('『예상 종료 시간 : ' +  predict_endtime.strftime('%H:%M:%S') + '』')
 time.sleep(0.5)
 print(f'{math.trunc(worktime_min)}분 동안 {math.trunc(timesleep_min)}분에 1개씩 자동 입력을 진행합니다.\n예상 입력 개수는 ' + 
       str(math.trunc(((worktime_min)/timesleep_min))) + '개 입니다.')
@@ -54,7 +55,7 @@ terminate_time = timeit.default_timer()
 running_time = terminate_time - start_time
 end_now = datetime.now()
 print("%f분 걸렸습니다." % math.trunc(running_time/60))
-print('[작업 종료 시간 : ' +  end_now.strftime('%Y-%m-%d %H:%M:%S') + ']')
+print('[작업 종료 시간 : ' +  end_now.strftime('%H:%M:%S') + ']')
 
 
 
