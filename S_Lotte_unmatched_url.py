@@ -4,7 +4,8 @@ import openpyxl
 import time
 import datetime
 import timeit
-from PIL import ImageGrab
+import math
+
 
 import requests
 from bs4 import BeautifulSoup
@@ -25,17 +26,33 @@ chrome_options.add_experimental_option("detach", True)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 
-#  URL 저장할 엑셀파일 정의하기
+# new file명에 입력되는 시간 정의하기
 now = datetime.datetime.now()
-today = now.strftime('%Y-%m-%d-%H-%M')
-new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\Lotte_unmatched_url\Lotte_unmatched_url({}).xlsx'.format(today) #울집컴
-new_file = openpyxl.Workbook()
-new_file_ws = new_file.active
+
+
+
+
+## 이곳에서 ref file과 new file의 경로와 이름을 설정하시오. ##
+
+# 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
+new_file_name = '\Lotte_unmatched_url'
+new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\Lotte_unmatched_url'
+
+
+# 2.url정보를 가져올 엑셀파일의 주소와 이름을 설정하시오.
+ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\(Ref)Lotte_unmatched_url.xlsx'
+
+############################################################
+
+
+
+# 새로 만들 파일을 오픈하기.
+open_file = openpyxl.Workbook()
+open_file_ws = open_file.active
 
 
 
 # 엑셀 파일 열기
-ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\(Ref)Lotte_unmatched_url.xlsx'
 ref_wb = openpyxl.load_workbook(ref_file)
 ref_ws = ref_wb.active
 
@@ -50,11 +67,13 @@ lotte_url = list(filter(None, sample_list))
 
 
 
-browser = webdriver.Chrome(options=chrome_options)
 
 # 상품 정보가 남아있는 url 출력 및 수집
+browser = webdriver.Chrome(options=chrome_options)
+browser.minimize_window()
 matched = []
 idx = 1
+working_num = 1
 for i in lotte_url:
 
     try:
@@ -70,13 +89,16 @@ for i in lotte_url:
         print(f"{idx}) {title}")
         print(f"{i}\n")
         matched.append(i)
-        new_file_ws[f'a{idx}'] = str(i)
+        open_file_ws[f'a{idx}'] = str(i)
         idx += 1
         next
+    print(f'『 {working_num}/{len(lotte_url)} 』 완료.')
+    working_num += 1
+    
 
 
 browser.quit()
-
+print('『 browser exited. 』')
 
 
 # # 수집된 URL이 {minimum}개 이하면 바로 오픈하기
@@ -92,17 +114,20 @@ browser.quit()
 
 
 
-# 작업 종료 알림
-new_file.save(new_file_adress)
-print('『new file saved.』')
+# new file 저장하기.
+today = now.strftime('%Y-%m-%d-%H-%M')
+new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
 
+open_file.save(new_file)
+print('『 new file saved. 』')
+
+
+
+# 작업 종료 알림
 end_now = datetime.datetime.now()
 end_now_str = now.strftime('%Y-%m-%d %H:%M:%S')
 finished_time = timeit.default_timer()
 running_time = finished_time - start_time
 
-running_time = finished_time - start_time
-print(f'[{running_time/60}] 소요되었습니다.')
-print(f"[{end_now_str}] 작업을 종료합니다.")
-
-
+print(f'『 {math.trunc(running_time/60)}m 소요되었습니다. 』')
+print(f"『 {end_now_str} 작업을 종료합니다. 』")
