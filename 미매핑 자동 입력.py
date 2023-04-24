@@ -15,8 +15,8 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 45
-timesleep_min = 4
+worktime_min = 20
+timesleep_min = 3
 #---------------------
 
 predict_endtime = start_now + timedelta(minutes=worktime_min)

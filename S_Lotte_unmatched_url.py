@@ -46,6 +46,8 @@ ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\Crawling\(Ref)Lotte_u
 
 
 
+
+
 # 새로 만들 파일을 오픈하기.
 open_file = openpyxl.Workbook()
 open_file_ws = open_file.active
