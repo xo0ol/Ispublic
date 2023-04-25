@@ -44,7 +44,7 @@ browser = webdriver.Chrome(options=chrome_options)
 browser.get(book_url)
 browser.maximize_window() # 화면 제일 크게
 time.sleep(5)
-# 저장할 폴더, 파일명 정의
+
 
 
 
@@ -72,8 +72,12 @@ while y <= last_pages:
     y += 2
     image_count += 1
 
+
+
 # 브라우저 자동 종료
 browser.quit()
+
+
 
 # 작업 시간 체크
 finish_time_now = datetime.now()
@@ -81,12 +85,3 @@ finish_time = timeit.default_timer()
 running_time = start_time - finish_time
 print(f"『 {finish_time_now.strftime('%H:%M:%S')} {folder_name} 이미지 저장 완료. 』")
 print(f'『 [{image_count}] image capture. [{math.trunc(running_time/60)}]분 소요되었습니다. 』')
-# 좌표 구하기
-# time.sleep(2)
-# print(pag.position())
-
-
-# path = r"C:\Capture\Capture.png"
-
-# time.sleep(2)
-# pag.screenshot(path, region=(290, 160, 1400, 800))
