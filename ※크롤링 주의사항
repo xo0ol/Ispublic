@@ -1,0 +1,10 @@
+1. 로봇이 아닙니다
+
+headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'}
+requests.get(url, headers=headers)
+
+모든 브라우저들은 Header에 User agent를 가지고있는데,
+크롤러처럼 url정보만 가지고 요청하면 이 값이 비어있다.
+Header에 User-Agent를 보고 어떤 환경에서 접근했는지 판단하는데, 이 값이 비어있으면
+프로그램에서 온 요청이라 판단하고 블락시키는 경우가 생긴다.
+

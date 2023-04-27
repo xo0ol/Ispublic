@@ -15,7 +15,7 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 20
+worktime_min = 150
 timesleep_min = 3
 #---------------------
 
@@ -39,7 +39,7 @@ while True:
         time.sleep((timesleep_min*60)-2)
         p.hotkey('ctrl','c')
         time.sleep(1)
-        p.press('down')
+        # p.press('down')
         time.sleep(1)
         p.hotkey('ctrl','v')
         
