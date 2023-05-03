@@ -83,13 +83,15 @@ for i in lotte_url:
         html = respon.text
         soup = BeautifulSoup(html, 'html.parser')
         title = soup.select_one('title').text
-        print(f"『 {working_num}/{len(lotte_url)} 완료. 』 {idx}) {title}")
+        print(f"『 ({working_num}/{len(lotte_url)}) 완료. 』 {idx}) {title}")
         # print(f"{i}\n") 
         matched.append(i)
         open_file_ws[f'a{idx}'] = str(i)
+        open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
+        
         idx += 1
         next
-    print(f'『 {working_num}/{len(lotte_url)} 완료. 』 ')
+    print(f'『 ({working_num}/{len(lotte_url)}) 완료. 』 ')
     working_num += 1
     
 
@@ -112,7 +114,7 @@ print('『 browser exited. 』')
 
 
 # new file 저장하기.
-today = now.strftime('%Y-%m-%d-%H-%M')
+today = now.strftime('%Y-%m-%d %H-%M')
 new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
 
 open_file.save(new_file)
