@@ -1,11 +1,10 @@
 import pyautogui
-import time
-import timeit
 import math
-import datetime
 
-from datetime import datetime
-from datetime import timedelta
+import time # time.sleep() 을 위한 패키지
+import timeit # 시간을 숫자단위로 측정. 시작시간-종료시간으로 작업시간을 계산
+from datetime import datetime # datetime.now() 을 위한 패키지
+from datetime import timedelta # 시간끼리의 연산을 위한 패키지
 
 p = pyautogui
 
@@ -20,7 +19,7 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 180
+worktime_min = 170
 timesleep_min = 3
 
 #---------------------
