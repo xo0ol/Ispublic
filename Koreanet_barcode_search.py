@@ -1,11 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
-import datetime
 import os
 import openpyxl
-import timeit
-import time
 import math
+
+
+import time # time.sleep() 을 위한 패키지
+import timeit # 시간을 숫자단위로 측정. 시작시간-종료시간으로 작업시간을 계산
+from datetime import datetime # datetime.now() 을 위한 패키지
+from datetime import timedelta # 시간끼리의 연산을 위한 패키지
 
 
 # running time check
@@ -103,7 +106,7 @@ for x in barcode:
 
 
         # 데이터 저장
-        today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+        today = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
 
         if len(weight_2) <= 1 :
             ws_2[f'a{idx}'] = f'koreannet_search/{str(title)} | {weight} | {today}'
@@ -119,7 +122,7 @@ for x in barcode:
             
            
     except:
-        today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+        today = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
         ws_2[f'a{idx}'] = f"no product({str(x)}) {today}"
         # ws_2[f'a{idx}'] = "koreannet_search/" + str(x).ljust(13," ") + "no product"
         # print('('+str(idx)+'/'+str(count_bar)) + f"no product({str(x)})"
@@ -132,7 +135,7 @@ for x in barcode:
 
 
 # new file 저장하기.
-now = datetime.datetime.now()
+now = datetime.now()
 today = now.strftime('%Y-%m-%d')
 new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
 
@@ -150,7 +153,7 @@ wb_2.save(new_file)
 
 
 # 작업 종료 알림
-end_now_str = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+end_now_str = (datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
 finished_time = timeit.default_timer()
 running_time = math.trunc(finished_time - start_time)
 
