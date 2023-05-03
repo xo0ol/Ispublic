@@ -5,48 +5,42 @@ import os
 import openpyxl
 import timeit
 import time
+import math
 
+
+# running time check
 start_time = timeit.default_timer()
 
-# 바코드 파일
-ref_file = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\(Ref)hmp_search_data.xlsx'
 
 
-# 생성 파일
-now = datetime.datetime.now()
-today = now.strftime('%Y-%m-%d')
-new_file = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\hmp_search_crawling\koreanet_crawling({}).xlsx'.format(today) 
 
-uniq = 1
-while os.path.exists(new_file):
-    new_file = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\hmp_search_crawling\koreanet_crawling({})({}).xlsx'.format(today, uniq)
-    uniq += 1
+## 이곳에서 ref file과 new file의 경로와 이름을 설정하시오. ##
+
+# 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
+new_file_name = '\koreanet_crawling'
+new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\koreanet'
+
+
+# 2. 바코드 정보를 가져올 파일의 주소와 시트명을 설정하시오.
+ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\koreanet.txt'
+
+############################################################
+
+
+
 
 
 # 바코드 파일에서 바코드 데이터 리스트로 가져오기
-wb = openpyxl.load_workbook(ref_file)
-ws = wb['barcode']
+file = open(ref_file, 'r')
+read = file.readlines()
 
-
-j = 1
-barcode = []
-for i in ws.rows:
-    barcode.append(ws[f'a{j}'].value)
-    j = j+1
-
-
-
-k = 1
-while k <= len(barcode):
-    if None in barcode:
-        s = barcode.index(None)
-        barcode[s] = ""
-    k = k + 1
+barcode = [x.strip('\n') for x in read]
 print(barcode)
-
-
 count_bar = len(barcode)
-print(count_bar)
+
+
+
+
 
 
 
@@ -57,6 +51,9 @@ ws_2 = wb_2.active
 idx = 1
 
 
+
+
+# 웹 크롤링 시작
 for x in barcode:
     try:
         url = 'http://www.koreannet.or.kr/home/hpisSrchGtin.gs1?gtin=' + str(x)
@@ -106,29 +103,65 @@ for x in barcode:
 
 
         # 데이터 저장
+        today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+
         if len(weight_2) <= 1 :
-            ws_2[f'a{idx}'] = "koreannet_search/" + str(title) + " | " + weight
-            print(f'({idx}/{count_bar}) koreannet_search/'+str(title) + " | " + weight)
+            ws_2[f'a{idx}'] = f'koreannet_search/{str(title)} | {weight} | {today}'
+            print(f'({idx}/{count_bar}) koreannet_search/{str(title)} | {weight} | {today}')
 
         elif weight == ' G':
-            ws_2[f'a{idx}'] = "koreannet_search/" + str(title) + " | " + weight_2
-            print(f'({idx}/{count_bar}) koreannet_search/'+str(title) + " | " + weight_2) 
+            ws_2[f'a{idx}'] = f'koreannet_search/{str(title)} | {weight_2} | {today}'
+            print(f'({idx}/{count_bar}) koreannet_search/{str(title)} | {weight_2} | {today}')
 
         else:
-            ws_2[f'a{idx}'] = "koreannet_search/" + str(title) + " | " + weight + " | " + weight_2
-            print('('+str(idx)+'/'+str(count_bar)+') koreannet_search/'+str(title) + " | " + weight + " | "+ weight_2)
+            ws_2[f'a{idx}'] = f'koreannet_search/{str(title)} | {weight} | {weight_2} | {today}'
+            print(f'({idx}/{count_bar}) koreannet_search/{str(title)} | {weight} | {weight_2} | {today}')
+            
            
     except:
-
-        ws_2[f'a{idx}'] = "koreannet_search/" + str(x).ljust(13," ") + "      no product"
-        print('('+str(idx)+'/'+str(count_bar)+') koreannet_search/'+ str(x).ljust(13," ") + "      no product")
+        today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+        ws_2[f'a{idx}'] = f"no product({str(x)}) {today}"
+        # ws_2[f'a{idx}'] = "koreannet_search/" + str(x).ljust(13," ") + "no product"
+        # print('('+str(idx)+'/'+str(count_bar)) + f"no product({str(x)})"
+        print(f'({str(idx)}/{str(count_bar)}) no product({str(x)}) {today}')
         
     idx +=1
     time.sleep(0.5)
 
 
 
+
+# new file 저장하기.
+now = datetime.datetime.now()
+today = now.strftime('%Y-%m-%d')
+new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
+
+
+uniq = 1
+while os.path.exists(new_file):
+    new_file = new_file_adress  + new_file_name + '({})({}).xlsx'.format(today, uniq)
+    uniq += 1
+
 wb_2.save(new_file)
 
-terminate_time = timeit.default_timer()
-print("%f초 걸렸습니다." % (terminate_time - start_time))
+
+
+
+
+
+# 작업 종료 알림
+end_now_str = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+finished_time = timeit.default_timer()
+running_time = math.trunc(finished_time - start_time)
+
+
+if running_time % 60 == running_time:
+    print(running_time)
+    x_time = f'00:{str(running_time).rjust(2,"0")}'
+else:
+    x1 = math.trunc(running_time / 60)
+    x2 = running_time & 60
+    x_time = f'{str(x1).rjust(2,"0")}:{str(x2).rjust(2,"0")}'
+
+print(f'『 {(x_time)} 소요되었습니다. 』')
+print(f"『 {end_now_str} 작업을 종료합니다. 』")
