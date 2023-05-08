@@ -29,8 +29,7 @@ chrome_options.add_experimental_option("detach", True)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 
-# new file명에 입력되는 시간 정의하기
-now = datetime.now()
+
 
 
 
@@ -38,8 +37,8 @@ now = datetime.now()
 ## 이곳에서 ref file과 new file의 경로와 이름을 설정하시오. ##
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
-new_file_name = '\Lotte_unmatched_url'
-new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\Lotte_unmatched_url'
+new_file_name = '\lotte_barcode_url'
+new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url'
 
 
 # 2.url정보를 가져올 엑셀파일의 주소와 이름을 설정하시오.
@@ -120,7 +119,7 @@ print('『 browser exited. 』')
 
 
 # new file 저장하기.
-today = now.strftime('%Y-%m-%d %H-%M')
+today = datetime.now().strftime('%Y-%m-%d %H-%M')
 new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
 
 open_file.save(new_file)
