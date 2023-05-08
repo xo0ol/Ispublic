@@ -68,6 +68,9 @@ sample_list = [x.strip('\n') for x in read]
 lotte_url = list(filter(None, sample_list))
 count_bar = len(lotte_url)
 
+
+
+
 # 상품 정보가 남아있는 url 출력 및 수집
 browser = webdriver.Chrome(options=chrome_options)
 browser.minimize_window()
