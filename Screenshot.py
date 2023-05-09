@@ -22,10 +22,10 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 
 # 교재 설정
-book_url = "https://ebook.claverse.com/knou/viewer_knou.jsp?qry=Cz1uyuB93RbLDpteCe9yBoIl3Vb5mFocFnYzx8WmWpooXd4eXlACvlMIcPXvhepgf2FHFKJQ8xLN54oioHnU-li8YuzERA59D76J2QH8IWHd9YcUryi8f2ifSdcOfGgrslYhQdjGMr4yBd9KGUrkX1B8CMYB4BJvQ4Pti2_9dAY9vcijIzOCe7ly_BXPRF9ucxGSSFnNrdyL4-HH5Iuptcrou4qy9zsd-wK7Vpdh9PC_At8D1IeUfdbnBl61KQR0GujJxxhonFoqhFG87_jz9oMYuxYplknmh9aIBst5RWDs2KIHDPQrX6SmrJu9kRxJ"
-last_pages = 5 # ebook의 마지막 페이지 +1(홀수로)
-folder_name = "엑셀데이터분석교재" # 캡쳐본을 저장할 폴더의 이름
-image_saved_adress = r"C:\Users\xo0ol\OneDrive\통계데이터과학과\2023-1학기\워크북캡쳐" # 캡쳐본을 저장할 폴더의 주소
+book_url = "https://ebook.claverse.com/knou/viewer_knou.jsp?qry=nOLud6gqm76KX1CkOn9jE4pZc3IeaK_FaWsBzZyOzSxIfQthz2jjEnnbyKJEKxeTCbbsSx___mIFblz36s5SRkfMQJAzpbQvOS8cbsBJ5OKayeANE--9vRDuocVnQjpUdUh7mFr7Yq7zalM3B_J48OKG460BxvXsTJrdKiNi8iWxSP6XMuHeOilFA5y5RyI-BWkrIJi1-GKsDEffA8-_Cfcau0PqlwVECnQgREbNOYhQ8CS9J5FGIQtkCQAuijJEYXAcXB_C7JOjt1Zju5-a0Hz3C7ie9X8gnr6obvEo39BC4BXlQVVUWXt7bw7KxmB1"
+last_pages = 397 # ebook의 마지막 페이지 +1(홀수로)
+folder_name = "통계학개론교재" # 캡쳐본을 저장할 폴더의 이름
+image_saved_adress = r"C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\통계데이터과학과\2023-1학기\워크북캡쳐" # 캡쳐본을 저장할 폴더의 주소
 ################
 
 
