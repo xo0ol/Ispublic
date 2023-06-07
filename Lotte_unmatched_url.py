@@ -38,12 +38,11 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
 new_file_name = '\lotte_barcode_url'
-new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url'
+new_file_adress = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url'
 
 
-# 2.url정보를 가져올 엑셀파일의 주소와 이름을 설정하시오.
-ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url.txt'
-
+# 2.url정보를 가져올 파일의 주소와 이름을 설정하시오.
+ref_file = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url.txt'
 ############################################################
 
 
@@ -66,6 +65,8 @@ sample_list = [x.strip('\n') for x in read]
 
 lotte_url = list(filter(None, sample_list))
 count_bar = len(lotte_url)
+
+print(lotte_url)
 
 
 
