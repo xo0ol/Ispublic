@@ -21,11 +21,11 @@ start_time = timeit.default_timer()
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
 new_file_name = '\koreanet_crawling'
-new_file_adress = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\koreanet'
+new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\koreanet'
 
 
 # 2. 바코드 정보를 가져올 파일의 주소와 시트명을 설정하시오.
-ref_file = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\koreanet.txt'
+ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\koreanet.txt'
 # ref_file = r'C:\Users\sjeon\OneDrive\바탕 화면\xoyoung\crawling\koreanet.xlsx'
 ############################################################
 

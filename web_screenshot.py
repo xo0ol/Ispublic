@@ -1,9 +1,7 @@
-import pyautogui as pag
+import pyautogui as py
 import openpyxl
 import math
 
-import requests
-from bs4 import BeautifulSoup
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -18,9 +16,9 @@ from datetime import timedelta # 시간끼리의 연산을 위한 패키지
 
 
 
-
 # running time check
 start_time = timeit.default_timer()
+
 
 
 # 브라우저 꺼짐 방지
@@ -28,7 +26,8 @@ chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-
+# 화면 최대화
+# chrome_options.add_argument('--start-maximized')
 
 
 
@@ -37,21 +36,17 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 ## 이곳에서 ref file과 new file의 경로와 이름을 설정하시오. ##
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
-new_file_name = '\lotte_barcode_url'
-new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url'
+web_name = "homeplus"
+adress = r"C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling"
 
 
 # 2.url정보를 가져올 파일의 주소와 이름을 설정하시오.
-ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\lotte_barcode_url.txt'
+ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\screenshot.txt'
 ############################################################
 
 
 
 
-
-# 새로 만들 파일을 오픈하기.
-open_file = openpyxl.Workbook()
-open_file_ws = open_file.active
 
 
 
@@ -70,35 +65,42 @@ count_bar = len(lotte_url)
 
 
 
+# 작업 시작시간 알림 / 작업 시간 체크
+start_time_now = datetime.now()
+print(f"『 {start_time_now.strftime('%H:%M:%S')} {web_name} 이미지 저장 시작. 』")
+start_time = timeit.default_timer()
+
+
+
 
 # 상품 정보가 남아있는 url 출력 및 수집
 browser = webdriver.Chrome(options=chrome_options)
-browser.minimize_window()
+browser.maximize_window()
 matched = []
 idx = 1
 working_num = 1
-for i in lotte_url:
 
+for i in lotte_url:
+        
     try:
         browser.get(i)
         time.sleep(2)
-        title_error = browser.find_element(By.CLASS_NAME, 'titleError').text
-
-    except:
-        respon = requests.get(i)
-        html = respon.text
-        soup = BeautifulSoup(html, 'html.parser')
-        title = soup.select_one('title').text
-        print(f"『 ({working_num}/{len(lotte_url)}) 완료. 』 {idx}) {title}")
-        # print(f"{i}\n") 
-        matched.append(i)
-        open_file_ws[f'a{idx}'] = str(i)
-        open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
-        
+        path = "{}\{}_{}.png".format(adress, web_name, idx)
+        print(path)
+        py.screenshot(path, region=(365, 155, 1190, 845))
         idx += 1
-        next
-    print(f'『 ({working_num}/{len(lotte_url)}) 완료. 』 ')
-    working_num += 1
+        time.sleep(1)
+    except:
+        print(f"{idx} error")
+        browser.get(i)
+        time.sleep(2)
+        path = "{}\{}_{}.png".format(adress, web_name, idx)
+        print(path)
+        py.screenshot(path, region=(365, 155, 1190, 845))
+        idx += 1
+        time.sleep(1)
+        continue
+    
     
 
 
@@ -119,12 +121,12 @@ print('『 browser exited. 』')
 
 
 
-# new file 저장하기.
-today = datetime.now().strftime('%Y-%m-%d %H-%M')
-new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
+# # new file 저장하기.
+# today = datetime.now().strftime('%Y-%m-%d %H-%M')
+# new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
 
-open_file.save(new_file)
-print('『 new file saved. 』')
+# open_file.save(new_file)
+# print('『 new file saved. 』')
 
 
 

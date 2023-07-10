@@ -22,11 +22,11 @@ start_time = timeit.default_timer()
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
 new_file_name = '\emart_infomation'
-new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\emart'
+new_file_adress = r'C:\Users\jiwon\OneDrive\xoyoung\OneDrive\바탕 화면\xoyoung\crawling\emart'
 
 
 # 2.url정보를 가져올 엑셀파일의 주소와 이름을 설정하시오.
-ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\emart.txt'
+ref_file = r'C:\Users\jiwon\OneDrive\xoyoung\OneDrive\바탕 화면\xoyoung\crawling\emart.txt'
 
 ############################################################
 
@@ -64,6 +64,7 @@ open_file_ws['c1'] = 'price'
 open_file_ws['d1'] = 'delivery'
 open_file_ws['e1'] = 'out_of_stock'
 open_file_ws['f1'] = 'promotion'
+open_file_ws['g1'] = 'URL'
 
 
 
@@ -72,10 +73,10 @@ rows = 2
 idx = 1
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'}
 
-for i in emart_url_clean:
+for x in emart_url_clean:
 
-    requests.get(i, headers=headers)
-    respon = requests.get(i, headers=headers)
+    requests.get(x, headers=headers)
+    respon = requests.get(x, headers=headers)
     html = respon.text
     soup = BeautifulSoup(html, 'html.parser')
     time.sleep(2)
@@ -89,6 +90,7 @@ for i in emart_url_clean:
         open_file_ws[f'd{rows}'] = ""
         open_file_ws[f'e{rows}'] = ""
         open_file_ws[f'f{rows}'] = ""
+        open_file_ws[f'g{rows}'] = ""
         next
         
     else:     
@@ -137,14 +139,17 @@ for i in emart_url_clean:
             promotion = ""
         
         
-    open_file_ws[f'a{rows}'] = title
-    open_file_ws[f'b{rows}'] = new_price
-    open_file_ws[f'c{rows}'] = price
-    open_file_ws[f'd{rows}'] = delv
-    open_file_ws[f'e{rows}'] = out_of_stock
-    open_file_ws[f'f{rows}'] = promotion
+        open_file_ws[f'a{rows}'] = title
+        open_file_ws[f'b{rows}'] = new_price
+        open_file_ws[f'c{rows}'] = price
+        open_file_ws[f'd{rows}'] = delv
+        open_file_ws[f'e{rows}'] = out_of_stock
+        open_file_ws[f'f{rows}'] = promotion
+        open_file_ws[f'g{rows}'] = str(x)
+    
+    
 
-    print(f'『 ({str(count_bar)}/{str(idx)}) 완료. 』')
+    print(f'{title}『 ({str(count_bar)}/{str(idx)}) 완료. 』')
     rows += 1
     idx += 1
 

@@ -19,10 +19,12 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 100
-timesleep_min = 3
+worktime_min = 140
+timesleep_min = 5
 
 #---------------------
+
+
 
 
 # 작업 시작 알림
