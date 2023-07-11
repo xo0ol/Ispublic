@@ -37,7 +37,7 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
 web_name = "homeplus"
-adress = r"C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling"
+adress = r"C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\screenshot"
 
 
 # 2.url정보를 가져올 파일의 주소와 이름을 설정하시오.
@@ -77,7 +77,7 @@ start_time = timeit.default_timer()
 browser = webdriver.Chrome(options=chrome_options)
 browser.maximize_window()
 matched = []
-idx = 1
+idx = 351
 working_num = 1
 
 for i in lotte_url:
@@ -100,33 +100,10 @@ for i in lotte_url:
         idx += 1
         time.sleep(1)
         continue
-    
-    
 
 
 browser.quit()
 print('『 browser exited. 』')
-
-
-# # 수집된 URL이 {minimum}개 이하면 바로 오픈하기
-# minimum = 5
-# if len(matched) <= minimum:
-#     print(f"『추적 가능 lotte URL이 {len(matched)}개 발견되었습니다.』\nWebbrowser open")
-#     time.sleep(2)
-#     for x in matched:
-#         webbrowser.open(x)
-#         time.sleep(2)
-# else:
-#     print(f"『추적 가능한 lotte URL이 {len(matched)}개 발견되었습니다.』\nQuit\n")
-
-
-
-# # new file 저장하기.
-# today = datetime.now().strftime('%Y-%m-%d %H-%M')
-# new_file = new_file_adress  + new_file_name + '({}).xlsx'.format(today)
-
-# open_file.save(new_file)
-# print('『 new file saved. 』')
 
 
 
