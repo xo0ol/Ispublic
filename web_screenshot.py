@@ -37,11 +37,11 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
 web_name = "homeplus"
-adress = r"C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\screenshot"
+adress = r"C:\Users\jiwon\OneDrive\xoyoung\OneDrive\바탕 화면\xoyoung\crawling\screenshot_E_7월2주차_소희"
 
 
 # 2.url정보를 가져올 파일의 주소와 이름을 설정하시오.
-ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\screenshot.txt'
+ref_file = r'C:\Users\jiwon\OneDrive\xoyoung\OneDrive\바탕 화면\xoyoung\crawling\screenshot.txt'
 ############################################################
 
 
@@ -61,7 +61,8 @@ sample_list = [x.strip('\n') for x in read]
 lotte_url = list(filter(None, sample_list))
 count_bar = len(lotte_url)
 
-# print(lotte_url)
+print(count_bar)
+
 
 
 
@@ -77,7 +78,7 @@ start_time = timeit.default_timer()
 browser = webdriver.Chrome(options=chrome_options)
 browser.maximize_window()
 matched = []
-idx = 351
+idx = 1
 working_num = 1
 
 for i in lotte_url:
@@ -86,8 +87,8 @@ for i in lotte_url:
         browser.get(i)
         time.sleep(2)
         path = "{}\{}_{}.png".format(adress, web_name, idx)
-        print(path)
         py.screenshot(path, region=(365, 155, 1190, 845))
+        print(f"[{idx}/{count_bar}] Saved")
         idx += 1
         time.sleep(1)
     except:
@@ -95,8 +96,8 @@ for i in lotte_url:
         browser.get(i)
         time.sleep(2)
         path = "{}\{}_{}.png".format(adress, web_name, idx)
-        print(path)
         py.screenshot(path, region=(365, 155, 1190, 845))
+        print(f"[{idx}/{count_bar}] Saved")
         idx += 1
         time.sleep(1)
         continue
