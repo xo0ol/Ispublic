@@ -89,7 +89,7 @@ for i in lotte_url:
     if i == '':
         open_file_ws[f'a{idx}'] = ""
         open_file_ws[f'b{idx}'] = ""
-        print(f"『 ({idx}/{len(lotte_url)}) no search url 』")
+        print(f"({idx}/{len(lotte_url)})")
         
     else:
         try:
@@ -107,14 +107,14 @@ for i in lotte_url:
             open_file_ws[f'a{idx}'] = str(i)
             open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
 
-            print(f"『 ({idx}/{len(lotte_url)}) {title} 』")
+            print(f"({idx}/{len(lotte_url)}) 『 {title} 』")
             fine_count += 1
             next
         
         else:
             open_file_ws[f'a{idx}'] = ""
             open_file_ws[f'b{idx}'] = ""
-            print(f"『 ({idx}/{len(lotte_url)}) 』 ")
+            print(f"({idx}/{len(lotte_url)}) 『 no search url 』 ")
 
     idx += 1
     
