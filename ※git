@@ -1,7 +1,9 @@
 1. 저장소 생성
 git init
+: 해당 폴더를 깃 저장소로 생성할 준비
 
 git remote add origin https://github.com/xo0ol/폴더명.git
+: https://github.com/아이디/저장소이름.git 저장소 연결
 
 2. 저장소 확인
 
