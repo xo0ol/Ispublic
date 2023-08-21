@@ -77,7 +77,7 @@ while y <= last_pages:
 
 
 # 브라우저 자동 종료
-browser.quit()
+# browser.quit()
 
 
 

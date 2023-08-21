@@ -95,6 +95,7 @@ for i in lotte_url_clean:
 
     browser.get(i)
     time.sleep(2)
+    print(browser.page_source)
     
     try:
         title = browser.find_element(By.CLASS_NAME,"pd-widget1__product-name").text

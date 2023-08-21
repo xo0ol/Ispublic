@@ -59,14 +59,21 @@ open_file_ws = open_file.active
 file = open(ref_file, 'r')
 read = file.readlines()
 
-sample_list = [x.strip('\n') for x in read]
+# sample_list = [x.strip('\n') for x in read]
+lotte_url = [x.strip('\n') for x in read]
 
 
+# lotte_url = list(filter(None, sample_list))
+# idx = 0
+# for x in lotte_url:
+#     if x == '':
+#         lotte_url[idx] = ""
+#     idx += 1
 
-lotte_url = list(filter(None, sample_list))
+
 count_bar = len(lotte_url)
-
 # print(lotte_url)
+print(count_bar)
 
 
 
@@ -74,36 +81,47 @@ count_bar = len(lotte_url)
 # 상품 정보가 남아있는 url 출력 및 수집
 browser = webdriver.Chrome(options=chrome_options)
 browser.minimize_window()
-matched = []
+# matched = []
 idx = 1
-working_num = 1
+fine_count= 0
 for i in lotte_url:
 
-    try:
-        browser.get(i)
-        time.sleep(2)
-        title_error = browser.find_element(By.CLASS_NAME, 'titleError').text
-
-    except:
-        respon = requests.get(i)
-        html = respon.text
-        soup = BeautifulSoup(html, 'html.parser')
-        title = soup.select_one('title').text
-        print(f"『 ({working_num}/{len(lotte_url)}) 완료. 』 {idx}) {title}")
-        # print(f"{i}\n") 
-        matched.append(i)
-        open_file_ws[f'a{idx}'] = str(i)
-        open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
+    if i == '':
+        open_file_ws[f'a{idx}'] = ""
+        open_file_ws[f'b{idx}'] = ""
+        print(f"({idx}/{len(lotte_url)})")
         
-        idx += 1
-        next
-    print(f'『 ({working_num}/{len(lotte_url)}) 완료. 』 ')
-    working_num += 1
+    else:
+        try:
+            browser.get(i)
+            time.sleep(2)
+            title_error = browser.find_element(By.CLASS_NAME, 'titleError').text
+
+        except:
+            
+            respon = requests.get(i)
+            html = respon.text
+            soup = BeautifulSoup(html, 'html.parser')
+            title = soup.select_one('title').text
+            
+            open_file_ws[f'a{idx}'] = str(i)
+            open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
+
+            print(f"({idx}/{len(lotte_url)}) 『 {title} 』")
+            fine_count += 1
+            next
+        
+        else:
+            open_file_ws[f'a{idx}'] = ""
+            open_file_ws[f'b{idx}'] = ""
+            print(f"({idx}/{len(lotte_url)}) 『 no search url 』 ")
+
+    idx += 1
     
 
 
 browser.quit()
-print('『 browser exited. 』')
+print(f"『 browser exited. [{fine_count}] Target url match. 』")
 
 
 # # 수집된 URL이 {minimum}개 이하면 바로 오픈하기

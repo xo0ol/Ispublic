@@ -8,6 +8,11 @@ from datetime import timedelta # 시간끼리의 연산을 위한 패키지
 
 p = pyautogui
 
+#1
+#2
+#3
+#4
+
 
 # 시작시간 설정
 start_time = timeit.default_timer()
@@ -19,9 +24,14 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
+<<<<<<< HEAD
 worktime_min = 210
 timesleep_min = 5
 
+=======
+worktime_min = 180
+timesleep_min = 7
+>>>>>>> c72028c6bd40b3e25f33b92c0eebfab1463e0388
 #---------------------
 
 
