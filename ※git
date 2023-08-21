@@ -5,9 +5,14 @@ git init
 git remote add origin https://github.com/xo0ol/폴더명.git
 : https://github.com/아이디/저장소이름.git 저장소 연결
 
+
+
 2. 저장소 확인
 
 ls -alt
+
+
+
 
 3. 파일 업로드
 
@@ -16,3 +21,31 @@ git add .
 git commit -m 메세지입력
 
 git push origin master
+
+
+
+
+4. 연결된 원격저장소  확인하기
+
+git remote -v
+
+
+
+5. 브랜치 만들기
+
+git branch 브랜치명
+
+git checkout 브랜치명
+
+git push origin git_test_sub1
+
+
+
+6. 브랜치 삭제하기
+
+git branch -d 브랜치명
+
+git push origin --delete 브랜치명
+
+git branch -a
+: 브랜치 확인하기
