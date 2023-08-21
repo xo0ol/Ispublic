@@ -8,6 +8,7 @@ from datetime import timedelta # 시간끼리의 연산을 위한 패키지
 
 p = pyautogui
 
+#1
 
 # 시작시간 설정
 start_time = timeit.default_timer()
