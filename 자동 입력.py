@@ -19,9 +19,8 @@ start_now = datetime.now()
 
 #---------------------
 # 이것만 수정
-worktime_min = 120
-timesleep_min = 6
-
+worktime_min = 180
+timesleep_min = 7
 #---------------------
 
 
