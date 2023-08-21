@@ -1,0 +1,16 @@
+1. 저장소 생성
+git init
+
+git remote add origin https://github.com/xo0ol/폴더명.git
+
+2. 저장소 확인
+
+ls -alt
+
+3. 파일 업로드
+
+git add .
+
+git commit -m 메세지입력
+
+git push origin master
