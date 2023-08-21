@@ -10,6 +10,9 @@ p = pyautogui
 
 #1
 #2
+#3
+#4
+
 
 # 시작시간 설정
 start_time = timeit.default_timer()
