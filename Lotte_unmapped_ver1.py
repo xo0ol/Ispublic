@@ -9,6 +9,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 import time # time.sleep() 을 위한 패키지
 import timeit # 시간을 숫자단위로 측정. 시작시간-종료시간으로 작업시간을 계산
@@ -24,9 +26,9 @@ start_time = timeit.default_timer()
 
 
 # 브라우저 꺼짐 방지
-chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
-chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+options = Options()
+options.add_experimental_option("detach", True)
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
 
 
@@ -76,10 +78,10 @@ count_bar = len(lotte_url)
 print(count_bar)
 
 
-
+service = ChromeService(executable_path=ChromeDriverManager().install())
 
 # 상품 정보가 남아있는 url 출력 및 수집
-browser = webdriver.Chrome(options=chrome_options)
+browser = webdriver.Chrome(service=service, options=options)
 browser.minimize_window()
 # matched = []
 idx = 1
@@ -161,5 +163,5 @@ else:
     x_time = f'{str(x1).rjust(2,"0")}:{str(x2).rjust(2,"0")}'
 
 
-print(f'『 {(x_time)} 소요되었습니다. 』')
-print(f"『 {end_now_str} 작업을 종료합니다. 』")
+# print(f'『 {(x_time)} 소요되었습니다. 』')
+print(f"『 {end_now_str} 작업을 종료합니다. [소요시간 : {x_time}] 』")

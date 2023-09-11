@@ -4,7 +4,7 @@ git init
 
 git remote add origin https://github.com/xo0ol/폴더명.git
 : https://github.com/아이디/저장소이름.git 저장소 연결
-33
+
 
 
 2. 저장소 확인

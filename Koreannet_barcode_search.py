@@ -25,12 +25,14 @@ new_file_name = '\koreanet_crawling'
 
 # new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\koreanet'
 new_file_adress = r'C:\Users\user\Desktop\소영파일\koreanet' # 궁동집
-
+new_file_adress = r'C:\Users\PC\OneDrive\바탕 화면\xoyoung\crawling\koreanet' # 궁동집안방
 
 
 # 2. 바코드 정보를 가져올 파일의 주소와 시트명을 설정하시오.
 # ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\koreanet.txt'
-ref_file = r'C:\Users\user\Desktop\소영파일\koreanet.txt' # 궁동집
+# ref_file = r'C:\Users\user\Desktop\소영파일\koreanet.txt' # 궁동집
+ref_file = r'C:\Users\PC\OneDrive\바탕 화면\xoyoung\crawling\koreanet.txt' # 궁동집안방
+
 ############################################################
 
 
