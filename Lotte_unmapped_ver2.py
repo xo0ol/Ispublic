@@ -4,6 +4,8 @@ import math
 
 import requests
 from bs4 import BeautifulSoup
+import urllib3
+
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -101,30 +103,31 @@ for i in lotte_url:
 
         except:
             
-            respon = requests.get(i)
-            html = respon.text
-            soup = BeautifulSoup(html, 'html.parser')
-            title = soup.select_one('title').text
+            # respon = requests.get(i)
+            # html = respon.text
+            # soup = BeautifulSoup(html, 'html.parser')
+            # title = soup.select_one('title').text
+            title = browser.find_element(By.CLASS_NAME, "pd-widget1__product-name").text
             delv = browser.find_element(By.XPATH, '//*[@id="stickyTopParent"]/div[2]/div[4]/div[1]/div/div/ul/li[1]/span[2]').text
 
             if delv == "택배배송":
                 open_file_ws[f'a{idx}'] = ""
                 open_file_ws[f'b{idx}'] = ""
-                print(f"({idx}/{len(lotte_url)}) 『 no search url 』 ")
+                print(f"({idx}/{len(lotte_url)}) no search url")
                 next
 
             else:
                 open_file_ws[f'a{idx}'] = str(i)
                 open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
 
-                print(f"({idx}/{len(lotte_url)}) 『 {title} 』")
+                print(f"({idx}/{len(lotte_url)}) {title}")
                 fine_count += 1
                 next
         
         else:
             open_file_ws[f'a{idx}'] = ""
             open_file_ws[f'b{idx}'] = ""
-            print(f"({idx}/{len(lotte_url)}) 『 no search url 』 ")
+            print(f"({idx}/{len(lotte_url)}) no search url")
 
     idx += 1
     
@@ -171,5 +174,5 @@ else:
     x_time = f'{str(x1).rjust(2,"0")}:{str(x2).rjust(2,"0")}'
 
 
-print(f'『 {(x_time)} 소요되었습니다. 』')
-print(f"『 {end_now_str} 작업을 종료합니다. 』")
+# print(f'『 {(x_time)} 소요되었습니다. 』')
+print(f"『 {end_now_str} 작업을 종료합니다. [소요시간 : {x_time}] 』")
