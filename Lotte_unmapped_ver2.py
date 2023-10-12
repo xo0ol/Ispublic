@@ -4,7 +4,7 @@ import math
 
 import requests
 from bs4 import BeautifulSoup
-import urllib3
+# import urllib3
 
 
 from selenium import webdriver
@@ -13,6 +13,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+# pip install ChromeDriverManager
+
 
 import time # time.sleep() 을 위한 패키지
 import timeit # 시간을 숫자단위로 측정. 시작시간-종료시간으로 작업시간을 계산
@@ -93,7 +95,7 @@ for i in lotte_url:
     if i == '':
         open_file_ws[f'a{idx}'] = ""
         open_file_ws[f'b{idx}'] = ""
-        print(f"({idx}/{len(lotte_url)})")
+        print(f"({idx}/{len(lotte_url)}) - ")
         
     else:
         try:
