@@ -22,8 +22,8 @@ start_time = timeit.default_timer()
 #---------------------
 # 이것만 수정
 
-worktime_min =   30 # 몇 분동안 동작는걸 원하는지?
-timesleep_min =  6 # 몇 분에 한번씩 입력을 원하는지?
+worktime_min =  30 # 몇 분동안 동작는걸 원하는지?
+timesleep_min =  5 # 몇 분에 한번씩 입력을 원하는지?
 
 #---------------------
 

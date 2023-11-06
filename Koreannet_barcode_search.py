@@ -44,10 +44,8 @@ file = open(ref_file, 'r')
 read = file.readlines()
 
 barcode = [x.strip('\n') for x in read]
-print(barcode)
 count_bar = len(barcode)
-
-
+print(f"[ 작업 수량 : {count_bar} ]")
 
 
 
@@ -71,14 +69,10 @@ count_bar = len(barcode)
 
 
 
-
-
-
 # 워크시트 생성
 wb_2 = openpyxl.Workbook()
 ws_2 = wb_2.active
 idx = 1
-
 
 
 
@@ -109,7 +103,6 @@ for x in barcode:
 
 
         # inf에 순중량이 있다면 중량찾기 실행됨.
-
         for i in find_weight:
             weight.append(i.text)
 
@@ -121,7 +114,6 @@ for x in barcode:
 
         
         # inf에 용량이 있다면 중량찾기 실행됨.
-
         for i in find_weight:
             weight_2.append(i.text)
 
@@ -172,9 +164,6 @@ while os.path.exists(new_file):
     uniq += 1
 
 wb_2.save(new_file)
-
-
-
 
 
 

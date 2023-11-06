@@ -79,8 +79,8 @@ lotte_url = [x.strip('\n') for x in read]
 
 count_bar = len(lotte_url)
 # print(lotte_url)
-print(count_bar)
-
+print(f"[ Total URL : {count_bar} ]")
+count_bar_len = len(str(count_bar))
 
 
 service = ChromeService(executable_path=ChromeDriverManager().install())
@@ -95,7 +95,7 @@ for i in lotte_url:
     if i == '':
         open_file_ws[f'a{idx}'] = ""
         open_file_ws[f'b{idx}'] = ""
-        print(f"({idx}/{len(lotte_url)}) - ")
+        print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] - ")
         
     else:
         try:
@@ -115,21 +115,21 @@ for i in lotte_url:
             if delv == "택배배송":
                 open_file_ws[f'a{idx}'] = ""
                 open_file_ws[f'b{idx}'] = ""
-                print(f"({idx}/{len(lotte_url)}) no search url")
+                print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] no search url")
                 next
 
             else:
                 open_file_ws[f'a{idx}'] = str(i)
                 open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
 
-                print(f"({idx}/{len(lotte_url)}) {title}")
+                print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] {title}")
                 fine_count += 1
                 next
         
         else:
             open_file_ws[f'a{idx}'] = ""
             open_file_ws[f'b{idx}'] = ""
-            print(f"({idx}/{len(lotte_url)}) no search url")
+            print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] no search url")
 
     idx += 1
     
