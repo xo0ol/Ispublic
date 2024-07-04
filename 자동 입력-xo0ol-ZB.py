@@ -9,25 +9,18 @@ from datetime import timedelta # 시간끼리의 연산을 위한 패키지
 p = pyautogui
 
 
-# 
 # 시작시간 설정
 start_now = datetime.now()
 start_time = timeit.default_timer()
 
 
-
-
-
-
 #---------------------
 # 이것만 수정
 
-worktime_min =  30 # 몇 분동안 동작는걸 원하는지?
-timesleep_min =  5 # 몇 분에 한번씩 입력을 원하는지?
+worktime_min = 110 # 몇 분동안 동작는걸 원하는지?
+timesleep_min = 7 # 몇 분에 한번씩 입력을 원하는지?
 
 #---------------------
-
-
 
 
 # 작업 시작 알림
@@ -38,11 +31,6 @@ time.sleep(0.5)
 print(f'『 {math.trunc(worktime_min)}분 동안 {math.trunc(timesleep_min)}분에 1개씩 자동 입력을 진행합니다. 』\n『 예상 입력 개수는 ' + 
       str(math.trunc(((worktime_min)/timesleep_min))) + '개 입니다. 』')
 print('')
-
-
-
-
-
 
 
 x = 0
@@ -59,15 +47,11 @@ while True:
         time.sleep(1)
         p.hotkey('ctrl','v')
         
-
         x += 1
         now = datetime.now().strftime('%H:%M:%S')
         next_time = datetime.now() + timedelta(minutes=timesleep_min)
         next_comment = next_time.strftime('%H:%M:%S')
         print(f'{str(x).rjust(2,"0")}개 입력 완료 [{now}]\n다음 입력 시간 [{next_comment}]\n')
-
-
-
 
 
 
@@ -87,9 +71,3 @@ else:
 
 print(f'『 {(x_time)} 소요되었습니다. 』')
 print(f"『 {end_now_str} 작업을 종료합니다. 』")
-
-
-
-
-
-

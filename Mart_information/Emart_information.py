@@ -22,11 +22,11 @@ start_time = timeit.default_timer()
 
 # 1.새로 만들 파일을 저장할 주소와 이름을 설정하시오.
 new_file_name = '\emart_infomation'
-new_file_adress = r'C:\Users\jiwon\OneDrive\xoyoung\OneDrive\바탕 화면\xoyoung\crawling\emart'
+new_file_adress = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\emart'
 
 
 # 2.url정보를 가져올 엑셀파일의 주소와 이름을 설정하시오.
-ref_file = r'C:\Users\jiwon\OneDrive\xoyoung\OneDrive\바탕 화면\xoyoung\crawling\emart.txt'
+ref_file = r'C:\Users\xo0ol\OneDrive\바탕 화면\xoyoung\crawling\emart.txt'
 
 ############################################################
 

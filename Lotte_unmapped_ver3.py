@@ -77,45 +77,42 @@ lotte_url = [x.strip('\n') for x in read]
 #     idx += 1
 
 
+
+# Total url 출력
 count_bar = len(lotte_url)
-# print(lotte_url)
 print(f"[ Total URL : {count_bar} ]")
 count_bar_len = len(str(count_bar))
 
 
-service = ChromeService(executable_path=ChromeDriverManager().install())
 # 상품 정보가 남아있는 url 출력 및 수집
+service = ChromeService(executable_path=ChromeDriverManager().install())
 browser = webdriver.Chrome(service=service, options=chrome_options)
 browser.minimize_window()
-# matched = []
+delivery_type = "내일 발송"
 idx = 1
-fine_count= 0
+find_count= 0
+
 for i in lotte_url:
 
-    if i == '':
+    if i == '': # url이 존재하지 않으면(공백이면) "-" 입력 후 넘어가기.
         open_file_ws[f'a{idx}'] = ""
         open_file_ws[f'b{idx}'] = ""
         print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] - ")
         
-    else:
-        try:
+    else: # url이 존재하면서,
+        try: # 상품 페이지가 존재하지 않으면 else문 실행.
             browser.get(i)
-            time.sleep(2)
+            time.sleep(3)
             title_error = browser.find_element(By.CLASS_NAME, 'titleError').text
 
-        except:
-            
-            # respon = requests.get(i)
-            # html = respon.text
-            # soup = BeautifulSoup(html, 'html.parser')
-            # title = soup.select_one('title').text
+        except: # 상품 페이지가 존재하면 except문 실행.
             title = browser.find_element(By.CLASS_NAME, "pd-widget1__product-name").text
-            delv = browser.find_element(By.XPATH, '//*[@id="stickyTopParent"]/div[2]/div[4]/div[1]/div/div/ul/li[1]/span[2]').text
+            delv = browser.find_element(By.CLASS_NAME, "pd-DeliveryInfo__inner").text
 
-            if delv == "택배배송":
+            if delivery_type in delv:
                 open_file_ws[f'a{idx}'] = ""
                 open_file_ws[f'b{idx}'] = ""
-                print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] no search url")
+                print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] case deleted by delivery")
                 next
 
             else:
@@ -123,7 +120,7 @@ for i in lotte_url:
                 open_file_ws[f'b{idx}'] = i[str(i).find('LM')+2:]
 
                 print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] {title}")
-                fine_count += 1
+                find_count += 1
                 next
         
         else:
@@ -132,23 +129,12 @@ for i in lotte_url:
             print(f"[{str(idx).rjust(count_bar_len,'0')}/{len(lotte_url)}] no search url")
 
     idx += 1
-    
+    time.sleep(1)
 
 
 browser.quit()
-print(f"『 browser exited. [{fine_count}] Target url match. 』")
+print(f"『 browser exited. [{find_count}] Target url match. 』")
 
-
-# # 수집된 URL이 {minimum}개 이하면 바로 오픈하기
-# minimum = 5
-# if len(matched) <= minimum:
-#     print(f"『추적 가능 lotte URL이 {len(matched)}개 발견되었습니다.』\nWebbrowser open")
-#     time.sleep(2)
-#     for x in matched:
-#         webbrowser.open(x)
-#         time.sleep(2)
-# else:
-#     print(f"『추적 가능한 lotte URL이 {len(matched)}개 발견되었습니다.』\nQuit\n")
 
 
 
